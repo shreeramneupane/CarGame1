@@ -4,7 +4,7 @@ counter = 0 ;
 var yOpponent = 0;
 var yPitch = -4500;
 var yPlayer = 10;
-var opponentCroosed = 0;
+var opponentCrossed = 0;
 var playerProperties = document.getElementsByClassName("player")[0];
 var move = true;
 var image = document.createElement("img");
@@ -33,20 +33,20 @@ function GameLoop(){
 		playerProperties.style.bottom = yPlayer+"px";	
 		}
 	this.collision = function(){	
-		var recentOpponentLeft= document.defaultView.getComputedStyle(listOfOpponent[opponentCroosed],null).getPropertyValue("left");	 
+		var recentOpponentLeft= document.defaultView.getComputedStyle(listOfOpponent[opponentCrossed],null).getPropertyValue("left");	 
 		var playerLeft = document.defaultView.getComputedStyle(playerProperties,null).getPropertyValue("left");
-		var recentOpponentBottom = document.defaultView.getComputedStyle(listOfOpponent[opponentCroosed],null).getPropertyValue("bottom");	 
+		var recentOpponentBottom = document.defaultView.getComputedStyle(listOfOpponent[opponentCrossed],null).getPropertyValue("bottom");	 
 		var playerButtom = document.defaultView.getComputedStyle(playerProperties,null).getPropertyValue("bottom");
 		var buttomDifference = parseInt(playerButtom)-parseInt(recentOpponentBottom);
-		if((parseInt(recentOpponentLeft) == parseInt(playerLeft)) && opponentCroosed!=0 && buttomDifference<120){
+		if((parseInt(recentOpponentLeft) == parseInt(playerLeft)) && opponentCrossed!=0 && buttomDifference<120){
 			clearInterval(x);
 			move = false;
-			playerProperties.appendChild(image);
+			document.getElementsByClassName("opponent")[opponentCrossed].appendChild(image);
 			}
 			else if((parseInt(playerButtom)>370 && parseInt(playerButtom)<650 && (parseInt(recentOpponentLeft) == parseInt(playerLeft)))){
 				clearInterval(x);	
 				move = false;
-				playerProperties.appendChild(image);			
+				document.getElementsByClassName("opponent")[0].appendChild(image);			
 				}
 			else if(yPlayer==4750){
 				clearInterval(x);
@@ -55,7 +55,7 @@ function GameLoop(){
 				playerProperties.appendChild(image);
 				}		
 		if(buttomDifference>360)
-			opponentCroosed++;
+			opponentCrossed++;
 		}
 	this.score = function(){
 		document.getElementsByClassName("score")[0].innerHTML = -(4750 - yPlayer);
